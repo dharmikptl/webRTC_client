@@ -11,7 +11,7 @@ export const useSocket = () => {
 }
 
 export const SocketProvider = ({ children }) => {
-  const socket = useMemo(() => io('http://192.168.3.131:8001'), [])
+  const socket = useMemo(() => io('https://webrtcserver-production.up.railway.app'), [])
   return (
     <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
   )
