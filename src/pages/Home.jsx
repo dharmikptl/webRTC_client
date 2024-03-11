@@ -7,6 +7,7 @@ const HomePage = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [roomId, setRoomId] = useState('')
+
   const handleJoinRoom = () => {
     socket.emit('join-room', { roomId, emailId: email })
   }
@@ -17,7 +18,11 @@ const HomePage = () => {
 
   useEffect(() => {
     socket.on('joined-room', handleRoomJoined)
-  }, [socket])
+    return () => {
+      socket.off('joined-room', handleRoomJoined)
+    }
+  }, [socket, handleRoomJoined])
+
   return (
     <div className="homepage-container">
       <div className="input-container">
